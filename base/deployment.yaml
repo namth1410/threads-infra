@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: threads
-          image: your-dockerhub-username/threads:dev
+          image: dangnam141002/threads:dev
           ports:
             - containerPort: 80
           env:

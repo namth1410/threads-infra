@@ -3,4 +3,13 @@ kind: Deployment
 metadata:
   name: threads
 spec:
-  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: threads
+          image: dangnam141002/threads:dev
+          env:
+            - name: NODE_ENV
+              value: development
+          ports:
+            - containerPort: 80
