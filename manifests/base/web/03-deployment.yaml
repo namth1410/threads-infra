@@ -17,10 +17,6 @@ spec:
           image: dangnam141002/threads:dev
           ports:
             - containerPort: 80
-          env:
-            - name: NODE_ENV
-              value: "development"
-            - name: VITE_API_URL
-              value: "http://localhost:3000/api" # ví dụ env cho FE gọi BE
-            - name: VITE_SOCKET_SERVER_URL
-              value: "http://localhost:4000" # ví dụ env cho FE gọi BE
+          envFrom:
+            - configMapRef:
+                name: web-config
