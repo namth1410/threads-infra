@@ -4,5 +4,5 @@ metadata:
   name: web-config
 data:
   NODE_ENV: "development"
-  VITE_API_URL: "http://localhost:3000/api"
+  VITE_API_URL: "https://threads-api.namth.online/api"
   VITE_SOCKET_SERVER_URL: "http://localhost:4000"
