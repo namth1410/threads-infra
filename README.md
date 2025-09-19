@@ -15,7 +15,10 @@ argo 8080
 drone 8081
 harbor 8082
 
-# Không đi riêng xe vì:
-- Người đi chậm ngại vì làm ae phải đi chậm theo
-- Người đi nhanh thì khó chịu vì phải đi chậm
-- Mỗi người 1 xe thì nhỡ trên đường có gì hay thì chụp ảnh kiểu gì
+### Minio
+    MINIO_ROOT_USER: namth
+    MINIO_ROOT_PASSWORD: 01664157092aA
+### Postgres
+    POSTGRES_USER: namth
+    POSTGRES_PASSWORD: 01664157092aA
+    POSTGRES_DB: threads_db
