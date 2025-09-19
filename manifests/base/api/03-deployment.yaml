@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dangnam141002/threads_be:latest
+          image: dangnam141002/threads_api:latest
           ports:
             - containerPort: 3000
           env:

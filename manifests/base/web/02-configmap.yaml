@@ -5,4 +5,4 @@ metadata:
 data:
   NODE_ENV: "development"
   VITE_API_URL: "https://threads-api.namth.online/api"
-  VITE_SOCKET_SERVER_URL: "http://localhost:4000"
+  VITE_SOCKET_SERVER_URL: "ws://threads-api.namth.online:3001"
