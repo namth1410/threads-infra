@@ -18,7 +18,7 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: config-volume
+            - name: web-config-volume
               mountPath: /usr/share/nginx/html/config.js
               subPath: config.js
       volumes:
