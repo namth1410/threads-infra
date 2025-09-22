@@ -5,6 +5,6 @@ metadata:
 data:
   config.js: |
     window._env_ = {
-      VITE_API_URL: "https://threads-api1.namth.online/api",
+      VITE_API_URL: "https://threads-api.namth.online/api",
       VITE_SOCKET_SERVER_URL: "wss://threads-api.namth.online"
     };
