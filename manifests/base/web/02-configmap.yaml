@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: web-config
 data:
-  NODE_ENV: "development"
-  VITE_API_URL: "https://threads-api.namth.online/api"
-  VITE_SOCKET_SERVER_URL: "ws://threads-api.namth.online:3001"
+  config.js: |
+    window._env_ = {
+      VITE_API_URL: "https://threads-api.namth.online/api",
+      VITE_SOCKET_SERVER_URL: "ws://threads-api.namth.online:3001"
+    };
