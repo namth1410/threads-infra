@@ -41,7 +41,7 @@ spec:
             - name: MINIO_ENDPOINT
               value: "minio.threads-dev.svc.cluster.local"
             - name: MINIO_PORT
-              value: "443"
+              value: "9000"
             - name: MINIO_ACCESS_KEY
               value: namth
             - name: MINIO_SECRET_KEY
