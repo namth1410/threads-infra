@@ -39,9 +39,9 @@ spec:
                   name: api-secret
                   key: JWT_SECRET
             - name: MINIO_ENDPOINT
-              value: minio
+              value: "minio.namth.online"
             - name: MINIO_PORT
-              value: "9000"
+              value: "443"
             - name: MINIO_ACCESS_KEY
               value: namth
             - name: MINIO_SECRET_KEY
