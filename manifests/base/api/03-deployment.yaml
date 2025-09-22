@@ -39,7 +39,7 @@ spec:
                   name: api-secret
                   key: JWT_SECRET
             - name: MINIO_ENDPOINT
-              value: "minio.namth.online"
+              value: "minio.threads-dev.svc.cluster.local"
             - name: MINIO_PORT
               value: "443"
             - name: MINIO_ACCESS_KEY
