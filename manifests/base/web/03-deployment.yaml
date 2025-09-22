@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: threads
-          image: dangnam141002/threads-fe:v1.0.2
+          image: dangnam141002/threads-fe:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           volumeMounts:
