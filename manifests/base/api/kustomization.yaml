@@ -5,4 +5,3 @@ resources:
   - 01-sealedsecret.yaml
   - 03-deployment.yaml
   - 04-service.yaml
-  # - 05-ingress.yaml
