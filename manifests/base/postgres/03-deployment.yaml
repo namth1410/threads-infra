@@ -12,8 +12,6 @@ spec:
       labels:
         app: postgres
     spec:
-      securityContext:
-        fsGroup: 999
       containers:
         - name: postgres
           image: postgres:latest
@@ -29,11 +27,9 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               value: threads_db
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - name: data
-              mountPath: /var/lib/postgresql/data/pgdata
+              mountPath: /var/lib/postgresql/data
       volumes:
         - name: data
           persistentVolumeClaim:
