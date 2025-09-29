@@ -4,7 +4,11 @@ kind: Kustomization
 namespace: threads-dev
 
 resources:
-  - ../../../base/web
+- ../../../base/web
 
 patchesStrategicMerge:
-  - patch-deployment.yaml
+- patch-deployment.yaml
+images:
+- name: dangnam141002/threads-fe:latest
+  newName: dangnam141002/threads-fe
+  newTag: 1.0.0-01d4750
