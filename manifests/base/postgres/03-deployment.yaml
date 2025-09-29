@@ -27,9 +27,11 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               value: threads_db
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - name: data
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql/data/pgdata
       volumes:
         - name: data
           persistentVolumeClaim:
