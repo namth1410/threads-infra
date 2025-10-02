@@ -3,10 +3,13 @@ kind: Kustomization
 
 namespace: threads-dev
 resources:
-  - ../../../base/api
+- ../../../base/api
 
 patches:
-  - path: patch-deployment.yaml
-    target:
-      kind: Deployment
-      name: api
+- path: patch-deployment.yaml
+  target:
+    kind: Deployment
+    name: api
+images:
+- name: :latest
+  newTag: 1.0.0-b8ac2bb
