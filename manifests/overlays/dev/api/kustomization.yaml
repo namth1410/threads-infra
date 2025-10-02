@@ -11,8 +11,6 @@ patches:
     kind: Deployment
     name: api
 images:
-- name: :latest
-  newTag: 1.0.0-b8ac2bb
 - name: dangnam141002/threads-be:latest
   newName: dangnam141002/threads-be
   newTag: 1.0.0-b8ac2bb
