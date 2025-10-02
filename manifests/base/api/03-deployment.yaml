@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: dangnam141002/threads-api:latest
+          image: dangnam141002/threads-be:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
