@@ -4,3 +4,5 @@ resources:
   - 02-configmap.yaml
   - 03-deployment.yaml
   - 04-service.yaml
+  - 05-ingress.yaml
+
