@@ -7,3 +7,4 @@ resources:
   - 04-service-api.yaml
   - 04-service-console.yaml
   - 08-pvc.yaml
+  - 05-ingress.yaml
