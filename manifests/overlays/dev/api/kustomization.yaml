@@ -13,4 +13,4 @@ patches:
 images:
 - name: dangnam141002/threads-be:latest
   newName: dangnam141002/threads-be
-  newTag: 1.0.0-b3dba01
+  newTag: 1.0.0-ca8de91
