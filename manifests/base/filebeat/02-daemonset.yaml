@@ -33,8 +33,13 @@ spec:
                   fieldPath: spec.nodeName
           securityContext:
             runAsUser: 0
-            # Privileged mode required to read container logs
-            privileged: true
+            # Instead of privileged: true, use specific capabilities
+            capabilities:
+              add:
+                # Required to read container logs
+                - DAC_READ_SEARCH
+              drop:
+                - ALL
           resources:
             limits:
               memory: 400Mi
