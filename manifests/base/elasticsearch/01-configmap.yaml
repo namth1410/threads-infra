@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-config
+data:
+  elasticsearch.yml: |
+    cluster.name: "threads-elasticsearch"
+    network.host: 0.0.0.0
+    
+    # Single-node cluster configuration
+    discovery.type: single-node
+    
+    # Disable X-Pack security for development
+    # Enable this in production with proper certificates
+    xpack.security.enabled: false
+    xpack.security.enrollment.enabled: false
+    
+    # Disable ML features to save resources
+    xpack.ml.enabled: false
+    
+    # HTTP settings
+    http.port: 9200
+    http.cors.enabled: true
+    http.cors.allow-origin: "*"
+    
+    # Path settings
+    path.data: /usr/share/elasticsearch/data
+    path.logs: /usr/share/elasticsearch/logs

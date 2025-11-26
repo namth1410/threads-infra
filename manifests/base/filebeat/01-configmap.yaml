@@ -1,0 +1,156 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebeat-config
+data:
+  filebeat.yml: |
+    filebeat.autodiscover:
+      providers:
+        - type: kubernetes
+          node: ${NODE_NAME}
+          hints.enabled: true
+          templates:
+            # Template for API service (JSON logs)
+            - condition:
+                contains:
+                  kubernetes.labels.app: "api"
+              config:
+                - type: container
+                  paths:
+                    - /var/log/containers/*-${data.kubernetes.container.id}.log
+                  processors:
+                    - decode_json_fields:
+                        fields: ["message"]
+                        target: ""
+                        overwrite_keys: true
+                    - add_fields:
+                        target: ""
+                        fields:
+                          service: "api"
+                          log_type: "application"
+                    - drop_fields:
+                        fields: ["agent", "ecs", "input", "host"]
+            
+            # Template for PostgreSQL
+            - condition:
+                contains:
+                  kubernetes.labels.app: "postgres"
+              config:
+                - type: container
+                  paths:
+                    - /var/log/containers/*-${data.kubernetes.container.id}.log
+                  processors:
+                    - add_fields:
+                        target: ""
+                        fields:
+                          service: "postgres"
+                          log_type: "database"
+                    - drop_fields:
+                        fields: ["agent", "ecs", "input", "host"]
+            
+            # Template for Redis
+            - condition:
+                contains:
+                  kubernetes.labels.app: "redis"
+              config:
+                - type: container
+                  paths:
+                    - /var/log/containers/*-${data.kubernetes.container.id}.log
+                  processors:
+                    - add_fields:
+                        target: ""
+                        fields:
+                          service: "redis"
+                          log_type: "cache"
+                    - drop_fields:
+                        fields: ["agent", "ecs", "input", "host"]
+            
+            # Template for MinIO (JSON logs)
+            - condition:
+                contains:
+                  kubernetes.labels.app: "minio"
+              config:
+                - type: container
+                  paths:
+                    - /var/log/containers/*-${data.kubernetes.container.id}.log
+                  processors:
+                    - decode_json_fields:
+                        fields: ["message"]
+                        target: ""
+                        overwrite_keys: true
+                        when:
+                          regexp:
+                            message: "^\\{"
+                    - add_fields:
+                        target: ""
+                        fields:
+                          service: "minio"
+                          log_type: "storage"
+                    - drop_fields:
+                        fields: ["agent", "ecs", "input", "host"]
+            
+            # Template for Web/Nginx
+            - condition:
+                contains:
+                  kubernetes.labels.app: "threads"
+              config:
+                - type: container
+                  paths:
+                    - /var/log/containers/*-${data.kubernetes.container.id}.log
+                  processors:
+                    - add_fields:
+                        target: ""
+                        fields:
+                          service: "web"
+                          log_type: "nginx"
+                    - drop_fields:
+                        fields: ["agent", "ecs", "input", "host"]
+    
+    # Add Kubernetes metadata
+    processors:
+      - add_kubernetes_metadata:
+          host: ${NODE_NAME}
+          matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+      - add_cloud_metadata: ~
+      - add_host_metadata: ~
+      - drop_event:
+          when:
+            or:
+              - equals:
+                  message: ""
+              - regexp:
+                  message: "^\\s*$"
+    
+    # Output to Elasticsearch with service-specific indices
+    output.elasticsearch:
+      hosts: ['${ELASTICSEARCH_HOST:elasticsearch}:${ELASTICSEARCH_PORT:9200}']
+      indices:
+        - index: "filebeat-api-%{+yyyy.MM.dd}"
+          when.equals:
+            service: "api"
+        - index: "filebeat-postgres-%{+yyyy.MM.dd}"
+          when.equals:
+            service: "postgres"
+        - index: "filebeat-redis-%{+yyyy.MM.dd}"
+          when.equals:
+            service: "redis"
+        - index: "filebeat-minio-%{+yyyy.MM.dd}"
+          when.equals:
+            service: "minio"
+        - index: "filebeat-web-%{+yyyy.MM.dd}"
+          when.equals:
+            service: "web"
+    
+    # Disable ILM for manual index management
+    setup.ilm.enabled: false
+    
+    # Logging
+    logging.level: info
+    logging.to_files: true
+    logging.files:
+      path: /var/log/filebeat
+      name: filebeat
+      keepfiles: 7
+      permissions: 0644

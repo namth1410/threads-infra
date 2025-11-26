@@ -1,0 +1,152 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-ilm-policies
+data:
+  # These policies need to be applied via Elasticsearch API after deployment
+  # Use kubectl exec or Kibana Dev Tools to apply them
+  
+  api-policy.json: |
+    {
+      "policy": {
+        "phases": {
+          "hot": {
+            "actions": {
+              "rollover": {
+                "max_age": "1d",
+                "max_size": "5gb"
+              }
+            }
+          },
+          "delete": {
+            "min_age": "30d",
+            "actions": {
+              "delete": {}
+            }
+          }
+        }
+      }
+    }
+  
+  postgres-policy.json: |
+    {
+      "policy": {
+        "phases": {
+          "hot": {
+            "actions": {
+              "rollover": {
+                "max_age": "1d",
+                "max_size": "5gb"
+              }
+            }
+          },
+          "delete": {
+            "min_age": "7d",
+            "actions": {
+              "delete": {}
+            }
+          }
+        }
+      }
+    }
+  
+  redis-policy.json: |
+    {
+      "policy": {
+        "phases": {
+          "hot": {
+            "actions": {
+              "rollover": {
+                "max_age": "1d",
+                "max_size": "2gb"
+              }
+            }
+          },
+          "delete": {
+            "min_age": "3d",
+            "actions": {
+              "delete": {}
+            }
+          }
+        }
+      }
+    }
+  
+  minio-policy.json: |
+    {
+      "policy": {
+        "phases": {
+          "hot": {
+            "actions": {
+              "rollover": {
+                "max_age": "1d",
+                "max_size": "3gb"
+              }
+            }
+          },
+          "delete": {
+            "min_age": "14d",
+            "actions": {
+              "delete": {}
+            }
+          }
+        }
+      }
+    }
+  
+  web-policy.json: |
+    {
+      "policy": {
+        "phases": {
+          "hot": {
+            "actions": {
+              "rollover": {
+                "max_age": "1d",
+                "max_size": "5gb"
+              }
+            }
+          },
+          "delete": {
+            "min_age": "7d",
+            "actions": {
+              "delete": {}
+            }
+          }
+        }
+      }
+    }
+  
+  apply-policies.sh: |
+    #!/bin/bash
+    # Script to apply ILM policies to Elasticsearch
+    
+    ES_HOST="http://localhost:9200"
+    
+    echo "Applying ILM policies..."
+    
+    # API policy (30 days retention)
+    curl -X PUT "$ES_HOST/_ilm/policy/filebeat-api-policy" \
+      -H 'Content-Type: application/json' \
+      -d @/policies/api-policy.json
+    
+    # PostgreSQL policy (7 days retention)
+    curl -X PUT "$ES_HOST/_ilm/policy/filebeat-postgres-policy" \
+      -H 'Content-Type: application/json' \
+      -d @/policies/postgres-policy.json
+    
+    # Redis policy (3 days retention)
+    curl -X PUT "$ES_HOST/_ilm/policy/filebeat-redis-policy" \
+      -H 'Content-Type: application/json' \
+      -d @/policies/redis-policy.json
+    
+    # MinIO policy (14 days retention)
+    curl -X PUT "$ES_HOST/_ilm/policy/filebeat-minio-policy" \
+      -H 'Content-Type: application/json' \
+      -d @/policies/minio-policy.json
+    
+    # Web policy (7 days retention)
+    curl -X PUT "$ES_HOST/_ilm/policy/filebeat-web-policy" \
+      -H 'Content-Type: application/json' \
+      -d @/policies/web-policy.json
+    
+    echo "ILM policies applied successfully!"
