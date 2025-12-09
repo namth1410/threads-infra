@@ -5,6 +5,7 @@ Infrastructure as Code for Threads project using Kubernetes, Kustomize, and Argo
 ## 🏗️ Architecture
 
 ### Services
+
 - **API** - Backend service (NestJS)
 - **Web** - Frontend application (React)
 - **PostgreSQL** - Primary database
@@ -13,9 +14,9 @@ Infrastructure as Code for Threads project using Kubernetes, Kustomize, and Argo
 - **ELK Stack** - Centralized logging (Elasticsearch, Filebeat, Kibana)
 
 ### Infrastructure Tools
+
 - **ArgoCD** - GitOps continuous deployment
 - **Drone CI** - CI/CD pipeline
-- **Harbor** - Container registry
 - **Grafana + Prometheus** - Monitoring (shared infrastructure)
 
 ## 📁 Project Structure
@@ -42,6 +43,7 @@ threads-infra/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Kubernetes cluster
 - kubectl configured
 - ArgoCD installed
@@ -68,6 +70,7 @@ kubectl apply -k manifests/overlays/dev/kibana
 ## 🔐 Credentials
 
 ### ArgoCD
+
 ```bash
 # Get admin password
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d && echo
@@ -79,6 +82,7 @@ argocd login localhost:8080 --username admin --password ibhLYtMlTn7mdpag
 ```
 
 ### PostgreSQL
+
 ```
 POSTGRES_USER: namth
 POSTGRES_PASSWORD: 01664157092aA
@@ -86,6 +90,7 @@ POSTGRES_DB: threads_db
 ```
 
 ### MinIO
+
 ```
 MINIO_ROOT_USER: namth
 MINIO_ROOT_PASSWORD: 01664157092aA
@@ -95,15 +100,16 @@ MINIO_ROOT_PASSWORD: 01664157092aA
 
 - **ArgoCD**: 8080
 - **Drone CI**: 8081
-- **Harbor**: 8082
 - **Kibana**: http://kibana.namth.online (or port-forward 5601)
 
 ## 📊 ELK Stack (Logging)
 
 ### Overview
+
 Centralized logging for all services using Elasticsearch, Filebeat, and Kibana.
 
 ### Quick Access
+
 ```bash
 # Port forward Kibana
 kubectl port-forward svc/kibana 5601:5601
@@ -112,6 +118,7 @@ kubectl port-forward svc/kibana 5601:5601
 ```
 
 ### Log Indices
+
 - `filebeat-api-*` - API service logs (30 days retention)
 - `filebeat-postgres-*` - PostgreSQL logs (7 days retention)
 - `filebeat-redis-*` - Redis logs (3 days retention)
@@ -119,18 +126,21 @@ kubectl port-forward svc/kibana 5601:5601
 - `filebeat-web-*` - Web/Nginx logs (7 days retention)
 
 ### Documentation
+
 - **Setup Guide**: [docs/ELK_SETUP.md](docs/ELK_SETUP.md)
 - **Logging Best Practices**: [docs/LOGGING_GUIDE.md](docs/LOGGING_GUIDE.md)
 
 ## 🔧 Development
 
 ### Update Ingress
+
 ```bash
 kubectl edit application ingress-nginx -n argocd
 # Remove old ingress configuration
 ```
 
 ### View Logs
+
 ```bash
 # Application logs (now in Kibana)
 kubectl logs -f deployment/api
@@ -141,6 +151,7 @@ kubectl logs -f deployment/web
 ```
 
 ### Scale Services
+
 ```bash
 kubectl scale deployment/api --replicas=3
 kubectl scale deployment/web --replicas=2
