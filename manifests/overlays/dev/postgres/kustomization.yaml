@@ -4,10 +4,4 @@ kind: Kustomization
 namespace: threads-dev
 
 resources:
-  - ../../../base/postgres
-
-patches:
-  - path: patch-deployment.yaml
-    target:
-      kind: Deployment
-      name: postgres
+  - ../../../base/postgres-cnpg
