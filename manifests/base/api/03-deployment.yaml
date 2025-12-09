@@ -22,7 +22,7 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: DB_HOST
-              value: postgres
+              value: postgres-cluster-rw
             - name: DB_PORT
               value: "5432"
             - name: DB_USER

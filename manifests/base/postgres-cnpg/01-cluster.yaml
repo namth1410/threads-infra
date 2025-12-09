@@ -1,0 +1,41 @@
+# CloudNativePG Cluster for threads
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-cluster
+spec:
+  instances: 1
+
+  # PostgreSQL image - use default (operator managed)
+
+  # Bootstrap - initialize with database
+  bootstrap:
+    initdb:
+      database: threads_db
+      owner: namth
+      secret:
+        name: postgres-cnpg-secret
+
+  # Storage configuration
+  storage:
+    size: 2Gi
+    storageClass: local-path
+
+  # Resources (optional, adjust as needed)
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+  # Monitoring (Prometheus)
+  monitoring:
+    enablePodMonitor: false # Set to true if you have Prometheus Operator
+
+  # PostgreSQL configuration
+  postgresql:
+    parameters:
+      max_connections: "100"
+      shared_buffers: "128MB"
