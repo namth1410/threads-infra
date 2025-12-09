@@ -4,5 +4,5 @@ kind: Kustomization
 namespace: threads-dev
 
 resources:
-  - 01-cluster.yaml
-  - 02-secret.yaml
+  - 01-sealedsecret.yaml
+  - 02-cluster.yaml
