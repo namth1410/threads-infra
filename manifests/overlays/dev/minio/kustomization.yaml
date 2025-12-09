@@ -6,5 +6,5 @@ namespace: threads-dev
 resources:
   - ../../../base/minio
 
-patchesStrategicMerge:
-  - patch-deployment.yaml
+patches:
+  - path: patch-deployment.yaml
