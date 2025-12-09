@@ -11,4 +11,4 @@ patchesStrategicMerge:
 images:
 - name: dangnam141002/threads-fe:latest
   newName: dangnam141002/threads-fe
-  newTag: 1.0.0-4fe6eab
+  newTag: 1.0.0-356a56d
