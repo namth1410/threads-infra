@@ -24,15 +24,9 @@ spec:
             - name: MINIO_USE_SSL
               value: "true"
             - name: MINIO_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: haohan-secrets
-                  key: minio-access-key
+              value: namth
             - name: MINIO_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: haohan-secrets
-                  key: minio-secret-key
+              value: 01664157092aA
             - name: MINIO_BUCKET_NAME
               value: "haohan"
           resources:
