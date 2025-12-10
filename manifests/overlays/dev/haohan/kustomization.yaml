@@ -3,9 +3,12 @@ kind: Kustomization
 
 namespace: threads-dev
 resources:
-  - ../../../base/haohan
+- ../../../base/haohan
 
 images:
-  - name: dangnam141002/haohan
-    newName: dangnam141002/haohan
-    newTag: latest
+- name: dangnam141002/haohan
+  newName: dangnam141002/haohan
+  newTag: latest
+- name: dangnam141002/haohan:latest
+  newName: dangnam141002/haohan
+  newTag: 1.0.0-28228c1
