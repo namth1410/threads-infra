@@ -7,7 +7,7 @@ spec:
   instances: 2 # Scale to 2 for zero-downtime upgrade
 
   # PostgreSQL image
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.2
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.0
 
   # Update strategy - force switchover for zero-downtime
   primaryUpdateStrategy: unsupervised # unsupervised = automatic switchover
