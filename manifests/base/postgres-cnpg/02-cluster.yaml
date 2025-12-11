@@ -6,7 +6,8 @@ metadata:
 spec:
   instances: 1
 
-  # PostgreSQL image - use default (operator managed)
+  # PostgreSQL image - upgraded to 17.2
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.2
 
   # Bootstrap - initialize with database
   bootstrap:
