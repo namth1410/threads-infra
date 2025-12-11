@@ -7,7 +7,7 @@ spec:
   instances: 2 # Scale to 2 for zero-downtime upgrade
 
   # PostgreSQL image - upgrading to 17.2 with rolling update
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.2
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.0
 
   # Bootstrap - initialize with database
   bootstrap:
