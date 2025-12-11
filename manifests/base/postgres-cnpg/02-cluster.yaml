@@ -6,8 +6,12 @@ metadata:
 spec:
   instances: 2 # Scale to 2 for zero-downtime upgrade
 
-  # PostgreSQL image - upgrading to 17.2 with rolling update
+  # PostgreSQL image
   imageName: ghcr.io/cloudnative-pg/postgresql:17.0
+
+  # Update strategy - force switchover for zero-downtime
+  primaryUpdateStrategy: unsupervised # unsupervised = automatic switchover
+  primaryUpdateMethod: switchover # switchover instead of restart
 
   # Bootstrap - initialize with database
   bootstrap:
