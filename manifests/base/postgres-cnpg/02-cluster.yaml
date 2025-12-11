@@ -32,7 +32,7 @@ spec:
 
   # Monitoring (Prometheus)
   monitoring:
-    enablePodMonitor: false # Set to true if you have Prometheus Operator
+    enablePodMonitor: true # Requires Prometheus Operator to be installed
 
   # PostgreSQL configuration
   postgresql:
