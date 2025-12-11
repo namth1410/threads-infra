@@ -44,3 +44,28 @@ spec:
     parameters:
       max_connections: "100"
       shared_buffers: "128MB"
+
+  # ============================================
+  # BACKUP CONFIGURATION
+  # ============================================
+  backup:
+    # Backup storage location (MinIO S3-compatible)
+    barmanObjectStore:
+      destinationPath: "s3://postgres-backups/"
+      endpointURL: "http://minio-api.threads-dev.svc.cluster.local:9000"
+      s3Credentials:
+        accessKeyId:
+          name: postgres-backup-minio-creds
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: postgres-backup-minio-creds
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+        maxParallel: 2
+      data:
+        compression: gzip
+        jobs: 2
+
+    # Retention policy
+    retentionPolicy: "7d" # Keep backups for 7 days

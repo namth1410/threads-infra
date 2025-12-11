@@ -6,3 +6,5 @@ namespace: threads-dev
 resources:
   - 01-sealedsecret.yaml
   - 02-cluster.yaml
+  - 03-backup-sealedsecret.yaml
+  - 04-scheduled-backup.yaml

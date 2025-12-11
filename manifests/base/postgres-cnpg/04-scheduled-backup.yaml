@@ -1,0 +1,21 @@
+# ScheduledBackup - Automatic backup schedule
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: postgres-scheduled-backup
+spec:
+  # Cron schedule: Every day at 2:00 AM
+  schedule: "0 2 * * *"
+
+  # Backup type
+  backupOwnerReference: self
+
+  # Target cluster
+  cluster:
+    name: postgres-cluster
+
+  # Immediate backup on creation (optional)
+  immediate: false
+
+  # Suspend schedule (set to true to pause)
+  suspend: false
