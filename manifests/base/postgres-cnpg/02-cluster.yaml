@@ -6,8 +6,8 @@ metadata:
 spec:
   instances: 1
 
-  # PostgreSQL image - upgraded to 17.2
-  imageName: ghcr.io/cloudnative-pg/postgresql:17.2
+  # PostgreSQL image - rollback to 17.0 for Expert approach demo
+  imageName: ghcr.io/cloudnative-pg/postgresql:17.0
 
   # Bootstrap - initialize with database
   bootstrap:
